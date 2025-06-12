@@ -1,0 +1,13 @@
+dl {
+    display: flex;
+    margin: 1rem 0;
+    flex-flow: row wrap;
+}
+
+dt {
+    flex-basis: 30%;
+}
+
+dd {
+    flex-basis: 60%;
+}
