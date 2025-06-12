@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Oppslagsside.css';
+import {Heading, Paragraph} from "@digdir/designsystemet-react";
 
-function App() {
+function Oppslagsside() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <section>
+        <Heading level={1} data-size={"xl"}>Virksomhetsopplysninger</Heading>
+        <Paragraph data-size={"md"}>Her kan du gjører søk på virksomhetsnavn</Paragraph>
+      </section>
+    </>
   );
 }
 
-export default App;
+export default Oppslagsside;
