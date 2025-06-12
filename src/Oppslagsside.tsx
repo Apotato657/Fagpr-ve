@@ -22,6 +22,10 @@ function Oppslagsside() {
                     <Search.Button/>
                 </Search>
             </section>
+            <section>
+
+            </section>
+
             <section className="filtrering-Wrapper">
                 <div className="filter-size">
                     <Heading data-size={"md"}>Filtreringsmuligheter</Heading>
