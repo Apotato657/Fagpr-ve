@@ -1,9 +1,10 @@
 import React from 'react';
 import './Oppslagsside.css';
 import {
+    Card,
     EXPERIMENTAL_MultiSuggestion,
     EXPERIMENTAL_MultiSuggestionChips, EXPERIMENTAL_Suggestion, Field, Fieldset,
-    Heading, Label,
+    Heading, Label, Link,
     Paragraph,
     Radio,
     Search
@@ -11,6 +12,8 @@ import {
 import {useAuth0} from "@auth0/auth0-react";
 import LogoutButton from "./Auth0/button-utlogging";
 import LoginButton from "./Auth0/button-innlogging";
+import matchersStandalone from "@testing-library/jest-dom/types/matchers-standalone";
+import {ResultCard} from "../../resultCard";
 
 function Oppslagsside() {
 
@@ -41,7 +44,12 @@ function Oppslagsside() {
                 </Search>
             </section>
             <section>
-
+                <Heading level={2}>Antall treff:</Heading>
+                <ul>
+                    <li>
+                        <ResultCard/>
+                    </li>
+                </ul>
             </section>
 
             <section className="filtrering-Wrapper">

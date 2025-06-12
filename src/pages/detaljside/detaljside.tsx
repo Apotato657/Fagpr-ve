@@ -1,5 +1,5 @@
 import {Card, Heading, Paragraph} from "@digdir/designsystemet-react";
-import {DetailGroup, DetailRow} from "./components/detail-row";
+import {DetailGroup, DetailRow} from "../../components/detail-row";
 import './detaljside.css'
 import LogoutButton from "./Auth0/button-utlogging";
 import LoginButton from "./Auth0/button-innlogging";
