@@ -1,3 +1,16 @@
 .ingress {
     margin-bottom: 2rem;
 }
+
+.filtrering-Wrapper{
+    display: flex;
+    margin-top: 4rem;
+}
+
+.filter-size {
+    flex-basis: 30%;
+}
+
+.filter-Wrapper {
+    margin-bottom: 24px;
+}
