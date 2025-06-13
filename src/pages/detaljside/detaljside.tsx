@@ -1,10 +1,10 @@
 import {Card, Heading, Paragraph} from "@digdir/designsystemet-react";
 import {DetailGroup, DetailRow} from "../../components/detail-row";
 import './detaljside.css'
-import LogoutButton from "./Auth0/button-utlogging";
-import LoginButton from "./Auth0/button-innlogging";
 import React from "react";
 import {useAuth0} from "@auth0/auth0-react";
+import LogoutButton from "../../Auth0/button-utlogging";
+import LoginButton from "../../Auth0/button-innlogging";
 
 export function Detaljside() {
 

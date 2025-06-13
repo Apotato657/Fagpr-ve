@@ -5,25 +5,22 @@ import {DetailGroup, DetailRow} from "./components/detail-row";
 export const ResultCard = () => {
 
     return (
-        <Card asChild data-size={"md"}>
+        <Card asChild className='cardWrapper' data-size={"md"}>
             <Link>
                 <Card.Block>
                     <Heading level={3}>virksomhetnavn</Heading>
-                    <Paragraph>Organisasjonsnummer:</Paragraph>
+                    <Paragraph>Organisasjonsnummer:123456789</Paragraph>
                 </Card.Block>
                 <Card.Block>
                     <DetailGroup>
-                        <DetailRow label='Organisasjonsform'>
-
+                        <DetailRow label='Organisasjonsform:'>
+                            HEI
                         </DetailRow>
-                        <DetailRow label=''>
-
+                        <DetailRow label='adresse:'>
+                            hallaaa
                         </DetailRow>
-                        <DetailRow label=''>
-
-                        </DetailRow>
-                        <DetailRow label=''>
-
+                        <DetailRow label='konkurs-status:'>
+                            hiv å hoj
                         </DetailRow>
                     </DetailGroup>
                 </Card.Block>
