@@ -8,10 +8,28 @@ import {
     Radio,
     Search
 } from "@digdir/designsystemet-react";
+import {useAuth0} from "@auth0/auth0-react";
+import LogoutButton from "./Auth0/button-utlogging";
+import LoginButton from "./Auth0/button-innlogging";
 
 function Oppslagsside() {
+
+    const { user, isAuthenticated} = useAuth0();
+
     return (
         <>
+            <header className='innlogging'>
+                {isAuthenticated ? (
+                    <div>
+                        <Paragraph>Innlogget: {user?.name}</Paragraph>
+                        <LogoutButton/>
+                    </div>
+                ) : (
+                    <LoginButton/>
+                    )
+                }
+            </header>
+
             <section>
                 <Heading level={1} data-size={"xl"}>Virksomhetsopplysninger</Heading>
                 <Paragraph data-size={"md"} className={'ingress'}>Her kan du gjører søk på virksomhetsnavn</Paragraph>

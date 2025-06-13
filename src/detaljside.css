@@ -1,3 +1,14 @@
 .detalj-wrapper {
     margin: 2rem 0;
 }
+
+.innlogging {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.innlogging div {
+    display: flex;
+    align-items: center;
+}

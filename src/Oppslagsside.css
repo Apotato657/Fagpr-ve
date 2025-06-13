@@ -18,3 +18,14 @@ h2 {
 .filter-Wrapper {
     margin-bottom: 24px;
 }
+
+.innlogging {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.innlogging div {
+    display: flex;
+    align-items: center;
+}
