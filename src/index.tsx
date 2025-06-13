@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './global.css';
 import '@digdir/designsystemet-css'
 import '@digdir/designsystemet-theme';
-import Oppslagsside from './Oppslagsside';
 import {Auth0Provider} from "@auth0/auth0-react";
-
+import Oppslagsside from './pages/oppslagsside/Oppslagsside';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
