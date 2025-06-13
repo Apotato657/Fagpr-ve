@@ -1,26 +1,37 @@
 import {Card, Heading, Link, Paragraph} from "@digdir/designsystemet-react";
-import React from "react";
+import React, {FC} from "react";
 import {DetailGroup, DetailRow} from "./components/detail-row";
+import {Adresse} from "./model/adresse";
 
-export const ResultCard = () => {
+interface Virksomhetprops {
+    navn: string,
+    organisasjonsnummer: string,
+    orgform: string,
+    konkurs: boolean,
+    forretningsadresse?: Adresse,
+
+
+}
+
+export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgform, konkurs, forretningsadresse}) => {
 
     return (
         <Card asChild className='cardWrapper' data-size={"md"}>
             <Link>
                 <Card.Block>
-                    <Heading level={3}>virksomhetnavn</Heading>
-                    <Paragraph>Organisasjonsnummer:123456789</Paragraph>
+                    <Heading level={3}>{navn}</Heading>
+                    <Paragraph>Organisasjonsnummer: {organisasjonsnummer}</Paragraph>
                 </Card.Block>
                 <Card.Block>
                     <DetailGroup>
                         <DetailRow label='Organisasjonsform:'>
-                            HEI
+                            {orgform}
                         </DetailRow>
                         <DetailRow label='adresse:'>
-                            hallaaa
+                            {forretningsadresse?.adresse}, {forretningsadresse?.kommune}, {forretningsadresse?.kommunenummer}
                         </DetailRow>
                         <DetailRow label='konkurs-status:'>
-                            hiv å hoj
+                            {konkurs}
                         </DetailRow>
                     </DetailGroup>
                 </Card.Block>

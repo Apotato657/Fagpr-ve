@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Oppslagsside.css';
 import {
     EXPERIMENTAL_MultiSuggestion,
@@ -12,10 +12,26 @@ import {useAuth0} from "@auth0/auth0-react";
 import {ResultCard} from "../../resultCard";
 import LogoutButton from "../../Auth0/button-utlogging";
 import LoginButton from "../../Auth0/button-innlogging";
+import {Virksomhet} from "../../model/virksomhet";
+import {fetchVirksomhet} from "../../virksomhet/fetch-virksomhet";
 
 function Oppslagsside() {
 
     const { user, isAuthenticated} = useAuth0();
+    const [virksomheter, setVirksomheter] = useState<Virksomhet[]>()
+    const [error, setError] = useState<string>()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const respons = await fetchVirksomhet();
+            if (respons.status === 'success') {
+                setVirksomheter(respons.virksomheter._embedded.enheter)
+            } else if (respons.status === 'fail') {
+                setError(respons.error)
+            }
+        }
+        fetchData()
+    }, []);
 
     return (
         <>
@@ -117,9 +133,17 @@ function Oppslagsside() {
                 <section>
                     <Heading level={2}>Antall treff:</Heading>
                     <ul className='card'>
-                        <li>
-                            <ResultCard/>
-                        </li>
+                        {virksomheter?.map(enhet => (
+                            <li key={enhet.navn}>
+                                <ResultCard
+                                navn={enhet.navn}
+                                organisasjonsnummer={enhet.organisasjonsnummer}
+                                orgform={enhet.organisasjonsform.beskrivelse}
+                                forretningsadresse={}
+                                konkurs={enhet.konkurs}
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </div>
