@@ -139,7 +139,7 @@ function Oppslagsside() {
                                 navn={enhet.navn}
                                 organisasjonsnummer={enhet.organisasjonsnummer}
                                 orgform={enhet.organisasjonsform.beskrivelse}
-                                forretningsadresse={}
+                                forretningsadresse={enhet.forretningsadresse}
                                 konkurs={enhet.konkurs}
                                 />
                             </li>

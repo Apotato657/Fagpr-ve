@@ -28,7 +28,7 @@ export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgf
                             {orgform}
                         </DetailRow>
                         <DetailRow label='adresse:'>
-                            {forretningsadresse?.adresse}, {forretningsadresse?.kommune}, {forretningsadresse?.kommunenummer}
+                            {forretningsadresse?.adresse?.join(', ')} <br/> {forretningsadresse?.kommunenummer}, {forretningsadresse?.kommune}
                         </DetailRow>
                         <DetailRow label='konkurs-status:'>
                             {konkurs}
