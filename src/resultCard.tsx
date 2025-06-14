@@ -17,7 +17,7 @@ export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgf
 
     return (
         <Card asChild className='cardWrapper' data-size={"md"}>
-            <Link>
+            <Link href={organisasjonsnummer}>
                 <Card.Block>
                     <Heading level={3}>{navn}</Heading>
                     <Paragraph>Organisasjonsnummer: {organisasjonsnummer}</Paragraph>
