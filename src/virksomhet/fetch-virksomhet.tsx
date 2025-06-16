@@ -34,10 +34,14 @@ export const fetchSingelVirksomhet = async (orgnummer: string | undefined): Prom
     }
 }
 
-export const fetchVirksomhet = async (): Promise<FetchVirksomhetRespons> => {
+export const fetchVirksomhet = async (searchParams?: string): Promise<FetchVirksomhetRespons> => {
+
+    const searchValue = `navn=${searchParams}`;
 
     try {
-        const respons = await fetch('https://data.brreg.no/enhetsregisteret/api/enheter');
+        const respons = searchParams ?
+            await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter?${searchValue}&size=20`) :
+            await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter`);
         return {
             status: 'success', virksomheter: (await respons.json()) as VirksomhetRespons
 
