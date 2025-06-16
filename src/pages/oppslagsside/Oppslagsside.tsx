@@ -12,40 +12,49 @@ import {useAuth0} from "@auth0/auth0-react";
 import {ResultCard} from "../../resultCard";
 import LogoutButton from "../../Auth0/button-utlogging";
 import LoginButton from "../../Auth0/button-innlogging";
-import {Virksomhet} from "../../model/virksomhet";
+import {Virksomhet, VirksomhetRespons} from "../../model/virksomhet";
 import {fetchVirksomhet} from "../../virksomhet/fetch-virksomhet";
+import {CustomPgaination} from "../../pagination";
 
 function Oppslagsside() {
 
     const {user, isAuthenticated} = useAuth0();
-    const [virksomheter, setVirksomheter] = useState<Virksomhet[]>()
+    const [virksomheter, setVirksomheter] = useState<VirksomhetRespons>()
     const [searchResult, setSearchResult] = useState<Virksomhet[]>([]);
-
+    const [virkNavn, setVirkNavn] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
     const [searchValue, setSearchValue] = useState('')
     const [error, setError] = useState<string>()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const respons = await fetchVirksomhet();
+
+        const fetchVirksomhetData = async (page = 0, virksomhetsNavn = virkNavn ) => {
+            const respons = await fetchVirksomhet(virksomhetsNavn, page - 1);
             if (respons.status === 'success') {
-                setVirksomheter(respons.virksomheter._embedded.enheter)
+                setVirksomheter(respons.virksomheter)
             } else if (respons.status === 'fail') {
                 setError(respons.error)
             }
         }
-        fetchData()
-    }, []);
 
-    const handelSearch = async (value: string) => {
+    useEffect(() => {
+        fetchVirksomhetData();
+    }, [virkNavn]);
+
+
+    const handelSearch = async (value: string, page = 0) => {
         if (searchValue.length > 0) {
-            console.log(value, 'heiiiii')
-            const fetchSearchRes = await fetchVirksomhet(value);
+            const fetchSearchRes = await fetchVirksomhet(value, page);
             if (fetchSearchRes.status === 'success' && fetchSearchRes.virksomheter._embedded.enheter) {
                 setSearchResult(fetchSearchRes.virksomheter._embedded.enheter)
             } else if (fetchSearchRes.status === 'fail') {
                 setError(fetchSearchRes.error)
             }
         }
+    }
+
+    const handelPageChange = (page:number) => {
+        setCurrentPage(page);
+        fetchVirksomhetData(page);
     }
 
     return (
@@ -151,12 +160,12 @@ function Oppslagsside() {
                     </div>
                 </section>
                 <section>
-                    <Heading level={2}>Viser {virksomheter?.length} av {virksomheter?.length} virksomheter</Heading>
+                    <Heading level={2}>Viser {virksomheter?._embedded.enheter.length} av {virksomheter?._embedded.enheter.length} virksomheter</Heading>
                     {error &&
                         <Heading level={2}>{error}</Heading>
                     }
                     <ul className='card'>
-                        {(searchResult?.length > 0 ? searchResult : virksomheter)?.map(enhet => (
+                        {(searchResult?.length > 0 ? searchResult : virksomheter?._embedded.enheter)?.map(enhet => (
                             <li key={enhet.navn}>
                                 <ResultCard
                                     organisasjonsnummer={enhet.organisasjonsnummer}
@@ -169,6 +178,11 @@ function Oppslagsside() {
                             </li>
                         ))}
                     </ul>
+                    {virksomheter && (
+                        <div>
+                            <CustomPgaination totalPages={virksomheter?.pages?.totalPages} sendCurrentPage={handelPageChange} getCurentPage={currentPage}/>
+                        </div>
+                    )}
                 </section>
             </div>
         </>
