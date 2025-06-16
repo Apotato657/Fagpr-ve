@@ -23,7 +23,7 @@ root.render(
             <BrowserRouter>
                 <Routes>
                     <Route path={'/'} element={<Oppslagsside/>}/>
-                    <Route path={':Orgnummer'} element={<Detaljside/>}/>
+                    <Route path={':orgnummer'} element={<Detaljside/>}/>
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>

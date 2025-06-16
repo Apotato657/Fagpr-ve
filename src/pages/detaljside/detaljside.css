@@ -12,3 +12,8 @@
     display: flex;
     align-items: center;
 }
+
+.buttonWrapper {
+    width: fit-content;
+    color: white;
+}
