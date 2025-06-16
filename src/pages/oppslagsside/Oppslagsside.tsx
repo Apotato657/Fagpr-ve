@@ -19,6 +19,9 @@ function Oppslagsside() {
 
     const {user, isAuthenticated} = useAuth0();
     const [virksomheter, setVirksomheter] = useState<Virksomhet[]>()
+    const [searchResult, setSearchResult] = useState<Virksomhet[]>([]);
+
+    const [searchValue, setSearchValue] = useState('')
     const [error, setError] = useState<string>()
 
     useEffect(() => {
@@ -32,6 +35,18 @@ function Oppslagsside() {
         }
         fetchData()
     }, []);
+
+    const handelSearch = async (value: string) => {
+        if (searchValue.length > 0) {
+            console.log(value, 'heiiiii')
+            const fetchSearchRes = await fetchVirksomhet(value);
+            if (fetchSearchRes.status === 'success' && fetchSearchRes.virksomheter._embedded.enheter) {
+                setSearchResult(fetchSearchRes.virksomheter._embedded.enheter)
+            } else if (fetchSearchRes.status === 'fail') {
+                setError(fetchSearchRes.error)
+            }
+        }
+    }
 
     return (
         <>
@@ -50,12 +65,17 @@ function Oppslagsside() {
             <section>
                 <Heading level={1} data-size={"xl"}>Virksomhetsopplysninger</Heading>
                 <Paragraph data-size={"md"} className={'ingress'}>Her kan du gjører søk på virksomhetsnavn</Paragraph>
-
-                <Search data-size={"md"}>
-                    <Search.Input aria-label='søk' placeholder={'Her kan du søke på virskomhetsnavn'}/>
-                    <Search.Clear/>
-                    <Search.Button/>
-                </Search>
+                <form onSubmit={e => e.preventDefault()}>
+                    <Search data-size={"md"}>
+                        <Search.Input aria-label='søk'
+                                      placeholder={'Her kan du søke på virskomhetsnavn'}
+                                      onChange={(e) => setSearchValue((e.target.value))}
+                                      value={searchValue}
+                        />
+                        <Search.Clear/>
+                        <Search.Button onClick={() => handelSearch(searchValue)} aria-label={'Søkeknapp'}/>
+                    </Search>
+                </form>
             </section>
             <div className='result-Wrapper'>
                 <section className="filtrering-Wrapper">
@@ -136,7 +156,7 @@ function Oppslagsside() {
                         <Heading level={2}>{error}</Heading>
                     }
                     <ul className='card'>
-                        {virksomheter?.map(enhet => (
+                        {(searchResult?.length > 0 ? searchResult : virksomheter)?.map(enhet => (
                             <li key={enhet.navn}>
                                 <ResultCard
                                     organisasjonsnummer={enhet.organisasjonsnummer}
