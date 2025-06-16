@@ -8,6 +8,32 @@ export type FetchVirksomhetRespons = | {
     error: string;
 }
 
+class Virksomhet {
+}
+
+export type FetchSingleVirksomhetRespons =
+    | {
+    status: 'success';
+    virksomhet: Virksomhet;
+    error?: string
+} | {
+    status: 'fail';
+    error: string;
+}
+
+export const fetchSingelVirksomhet = async (orgnummer: string | undefined): Promise<FetchSingleVirksomhetRespons> => {
+    try {
+        const respons = await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter/${orgnummer}`);
+        return {
+            status: 'success', virksomhet: (await respons.json()) as Virksomhet
+        }
+    } catch (e) {
+        return {
+            status: 'fail', error: 'Det har oppstått en feil'
+        }
+    }
+}
+
 export const fetchVirksomhet = async (): Promise<FetchVirksomhetRespons> => {
 
     try {
@@ -18,7 +44,7 @@ export const fetchVirksomhet = async (): Promise<FetchVirksomhetRespons> => {
         }
     } catch (e) {
         return {
-            status: 'fail', error: 'Det har oppstått en feil :('
+            status: 'fail', error: 'Det har oppstått en feil, fant ingen virksomheter :('
         }
     }
 }

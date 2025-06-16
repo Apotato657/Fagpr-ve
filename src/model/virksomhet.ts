@@ -10,6 +10,7 @@ export interface Virksomhet {
     organisasjonsform: Orgform,
     konkurs: boolean,
     antallAnsatte: number,
+    aktivitet?: string[],
     registreringsdatoEnhetsregisteret: string;
 }
 

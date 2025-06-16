@@ -17,7 +17,7 @@ import {fetchVirksomhet} from "../../virksomhet/fetch-virksomhet";
 
 function Oppslagsside() {
 
-    const { user, isAuthenticated} = useAuth0();
+    const {user, isAuthenticated} = useAuth0();
     const [virksomheter, setVirksomheter] = useState<Virksomhet[]>()
     const [error, setError] = useState<string>()
 
@@ -43,7 +43,7 @@ function Oppslagsside() {
                     </div>
                 ) : (
                     <LoginButton/>
-                    )
+                )
                 }
             </header>
 
@@ -131,16 +131,20 @@ function Oppslagsside() {
                     </div>
                 </section>
                 <section>
-                    <Heading level={2}>Antall treff:</Heading>
+                    <Heading level={2}>Viser {virksomheter?.length} av {virksomheter?.length} virksomheter</Heading>
+                    {error &&
+                        <Heading level={2}>{error}</Heading>
+                    }
                     <ul className='card'>
                         {virksomheter?.map(enhet => (
                             <li key={enhet.navn}>
                                 <ResultCard
-                                navn={enhet.navn}
-                                organisasjonsnummer={enhet.organisasjonsnummer}
-                                orgform={enhet.organisasjonsform.beskrivelse}
-                                forretningsadresse={enhet.forretningsadresse}
-                                konkurs={enhet.konkurs}
+                                    organisasjonsnummer={enhet.organisasjonsnummer}
+                                    navn={enhet.navn}
+                                    orgform={enhet.organisasjonsform.beskrivelse}
+                                    adresse={enhet.forretningsadresse ? enhet.forretningsadresse : enhet.postadresse}
+                                    adresseType={enhet.forretningsadresse ? 'Forretningsadresse' : 'Postadresse'}
+                                    konkurs={enhet.konkurs}
                                 />
                             </li>
                         ))}

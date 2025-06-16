@@ -40,6 +40,7 @@ h2 {
     margin: 0;
     list-style-type: none;
 }
+
 .card li {
     display: flex;
 
@@ -47,4 +48,5 @@ h2 {
 
 .cardWrapper {
     display: flex;
+    color: black;
 }

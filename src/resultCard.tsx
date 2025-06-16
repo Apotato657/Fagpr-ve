@@ -5,15 +5,16 @@ import {Adresse} from "./model/adresse";
 
 interface Virksomhetprops {
     navn: string,
-    organisasjonsnummer: string,
+    organisasjonsnummer?: string,
     orgform: string,
     konkurs: boolean,
-    forretningsadresse?: Adresse,
+    adresse?: Adresse,
+    adresseType: string
 
 
 }
 
-export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgform, konkurs, forretningsadresse}) => {
+export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgform, konkurs, adresse, adresseType}) => {
 
     return (
         <Card asChild className='cardWrapper' data-size={"md"}>
@@ -27,12 +28,14 @@ export const ResultCard: FC<Virksomhetprops> = ({navn, organisasjonsnummer, orgf
                         <DetailRow label='Organisasjonsform:'>
                             {orgform}
                         </DetailRow>
-                        <DetailRow label='adresse:'>
-                            {forretningsadresse?.adresse?.join(', ')} <br/> {forretningsadresse?.kommunenummer}, {forretningsadresse?.kommune}
+                        <DetailRow label={adresseType + ':'}>
+                            {adresse?.adresse?.join(', ')} <br/> {adresse?.kommunenummer}, {adresse?.kommune}
                         </DetailRow>
-                        <DetailRow label='konkurs-status:'>
-                            {konkurs}
-                        </DetailRow>
+                        {konkurs &&
+                            <DetailRow label='konkurs-status:'>
+                                {konkurs}
+                            </DetailRow>
+                        }
                     </DetailGroup>
                 </Card.Block>
             </Link>
