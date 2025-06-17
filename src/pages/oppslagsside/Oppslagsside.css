@@ -50,3 +50,17 @@ h2 {
     display: flex;
     color: black;
 }
+
+.pageWrapper {
+    display: flex;
+    margin: 2rem;
+}
+
+.paginationWrapper {
+    flex-basis: 70%;
+    margin: 0 2rem;
+}
+
+.pageCount {
+    flex-basis: 10%;
+}

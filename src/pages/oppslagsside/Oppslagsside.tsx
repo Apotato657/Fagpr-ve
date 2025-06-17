@@ -6,7 +6,7 @@ import {
     Heading, Label,
     Paragraph,
     Radio,
-    Search
+    Search, Select
 } from "@digdir/designsystemet-react";
 import {useAuth0} from "@auth0/auth0-react";
 import {ResultCard} from "../../resultCard";
@@ -14,7 +14,7 @@ import LogoutButton from "../../Auth0/button-utlogging";
 import LoginButton from "../../Auth0/button-innlogging";
 import {Virksomhet, VirksomhetRespons} from "../../model/virksomhet";
 import {fetchVirksomhet} from "../../virksomhet/fetch-virksomhet";
-import {CustomPgaination} from "../../pagination";
+import {CustomPagination} from "../../pagination";
 
 function Oppslagsside() {
 
@@ -24,11 +24,12 @@ function Oppslagsside() {
     const [virkNavn, setVirkNavn] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [searchValue, setSearchValue] = useState('')
+    const [pageSize, setPageSize] = useState(16);
     const [error, setError] = useState<string>()
 
 
-        const fetchVirksomhetData = async (page = 0, virksomhetsNavn = virkNavn ) => {
-            const respons = await fetchVirksomhet(virksomhetsNavn, page - 1);
+        const fetchVirksomhetData = async (page = 1, virksomhetsNavn = virkNavn, size = pageSize ) => {
+            const respons = await fetchVirksomhet(virksomhetsNavn, page, size);
             if (respons.status === 'success') {
                 setVirksomheter(respons.virksomheter)
             } else if (respons.status === 'fail') {
@@ -37,8 +38,8 @@ function Oppslagsside() {
         }
 
     useEffect(() => {
-        fetchVirksomhetData();
-    }, [virkNavn]);
+        fetchVirksomhetData(currentPage, virkNavn, pageSize);
+    }, [virkNavn, pageSize, currentPage]);
 
 
     const handelSearch = async (value: string, page = 0) => {
@@ -56,6 +57,14 @@ function Oppslagsside() {
         setCurrentPage(page);
         fetchVirksomhetData(page);
     }
+
+    const handleClear = () => {
+        setSearchValue('');
+        setVirkNavn('')
+        setCurrentPage(1);
+        setSearchResult([])
+        setVirksomheter(virksomheter)
+    };
 
     return (
         <>
@@ -81,7 +90,7 @@ function Oppslagsside() {
                                       onChange={(e) => setSearchValue((e.target.value))}
                                       value={searchValue}
                         />
-                        <Search.Clear/>
+                        <Search.Clear onClick={handleClear}/>
                         <Search.Button onClick={() => handelSearch(searchValue)} aria-label={'Søkeknapp'}/>
                     </Search>
                 </form>
@@ -179,9 +188,19 @@ function Oppslagsside() {
                         ))}
                     </ul>
                     {virksomheter && (
-                        <div>
-                            <CustomPgaination totalPages={virksomheter?.pages?.totalPages} sendCurrentPage={handelPageChange} getCurentPage={currentPage}/>
+                        <div className={'pageWrapper'}>
+                            <CustomPagination totalPages={virksomheter?.page?.totalPages} sendCurrentPage={handelPageChange} getCurrentPage={currentPage}/>
+                            <Select className={'pageCount'} onChange={(e) => {
+                                const newSize = parseInt(e.currentTarget.value);
+                                setPageSize(newSize);
+                                setCurrentPage(1);}}>
+                                <Select.Option value={'16'}>16</Select.Option>
+                                <Select.Option value="32">32</Select.Option>
+                                <Select.Option value="64">64</Select.Option>
+                                <Select.Option value="126">126</Select.Option>
+                            </Select>
                         </div>
+
                     )}
                 </section>
             </div>

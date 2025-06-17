@@ -25,5 +25,5 @@ export interface VirksomhetRespons {
     _embedded: {
         enheter: Virksomhet[];
     },
-    pages: Side
+    page: Side
 }
