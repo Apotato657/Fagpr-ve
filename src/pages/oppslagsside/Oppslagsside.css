@@ -42,12 +42,11 @@ h2 {
 }
 
 .card li {
-    display: flex;
+    margin: 1rem;
 
 }
 
 .cardWrapper {
-    display: flex;
     color: black;
 }
 

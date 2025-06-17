@@ -16,6 +16,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "express": "^4.21.2",
+    "jest-fetch-mock": "^3.0.3",
     "pg": "^8.16.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -26,15 +27,17 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
-  "DevDependencies": {
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "jest-fetch-mock": "^3.0.3"
+    "react-router-dom": "^7.4.1",
+    "ts-jest": "^29.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --config jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
