@@ -14,8 +14,16 @@ export interface Virksomhet {
     registreringsdatoEnhetsregisteret: string;
 }
 
+export interface Side {
+    number: number,
+    size: number,
+    totalPages: number,
+    totalElements: number,
+}
+
 export interface VirksomhetRespons {
     _embedded: {
         enheter: Virksomhet[];
-    }
+    },
+    page: Side
 }
