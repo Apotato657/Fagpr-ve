@@ -63,3 +63,15 @@ h2 {
 .pageCount {
     flex-basis: 10%;
 }
+
+@media (max-width: 1200px) {
+    .result-Wrapper {
+        flex-direction: column;
+
+    }
+
+    .pageWrapper {
+        flex-direction: column;
+        margin: 2rem 0;
+    }
+}

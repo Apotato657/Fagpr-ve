@@ -2,7 +2,7 @@ module.exports = {
     setupFiles: ['./jest.setup.js'],
     testEnvironment: "jsdom", // Trenger dette for å simulere DOM i React
     transform: {
-        "^.+\\.(jsx|ts|tsx)$": "ts-jest", // Bruk Babel til å transpile testene
+        "^.+\\.(jsx|ts|tsx)$": "ts-jest",
     },
     moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
     snapshotResolver: "<rootDir>/snapshotResolver.js",

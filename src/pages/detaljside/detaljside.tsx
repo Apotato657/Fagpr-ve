@@ -8,6 +8,7 @@ import LoginButton from "../../Auth0/button-innlogging";
 import {Virksomhet} from "../../model/virksomhet";
 import {fetchSingelVirksomhet} from "../../virksomhet/fetch-virksomhet";
 import {useParams} from "react-router";
+import {StringUtils} from "../../utils/string-utils";
 
 export function Detaljside() {
 
@@ -42,7 +43,7 @@ export function Detaljside() {
                 }
             </header>
             <Heading level={1} data-size={"xl"}>{virksomhet?.navn}</Heading>
-            <Heading level={3}>{virksomhet?.organisasjonsnummer}</Heading>
+            <Heading level={3}>{StringUtils.formatOrgNummer(virksomhet?.organisasjonsnummer ?? '')}</Heading>
 
             <Card className='detalj-wrapper'>
                 <Card.Block>
@@ -53,8 +54,8 @@ export function Detaljside() {
                 </Card.Block>
                 <Card.Block>
                     <DetailGroup>
-                        <DetailRow label={virksomhet?.forretningsadresse ? 'Forretningsadresse' : 'Postadresse'}>
-                            {virksomhet?.forretningsadresse.adresse ? virksomhet?.forretningsadresse.adresse : virksomhet?.postadresse.adresse}<br/> {virksomhet?.forretningsadresse.kommunenummer} {virksomhet?.forretningsadresse.kommune}
+                        <DetailRow label={virksomhet?.forretningsadresse?.adresse ? 'Forretningsadresse' : 'Postadresse'}>
+                            {virksomhet?.forretningsadresse.adresse ? virksomhet?.forretningsadresse?.adresse : virksomhet?.postadresse.adresse}<br/> {virksomhet?.forretningsadresse.kommunenummer} {virksomhet?.forretningsadresse.kommune}
                         </DetailRow>
                         <DetailRow label='Organisasjonsform:'>
                             {virksomhet?.organisasjonsform.beskrivelse}
