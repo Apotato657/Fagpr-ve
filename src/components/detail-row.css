@@ -11,3 +11,9 @@ dt {
 dd {
     flex-basis: 60%;
 }
+
+@media (max-width: 1200px) {
+    dl {
+        flex-direction: column;
+    }
+}

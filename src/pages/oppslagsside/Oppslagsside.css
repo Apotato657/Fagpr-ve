@@ -42,12 +42,11 @@ h2 {
 }
 
 .card li {
-    display: flex;
+    margin: 1rem;
 
 }
 
 .cardWrapper {
-    display: flex;
     color: black;
 }
 
@@ -63,4 +62,16 @@ h2 {
 
 .pageCount {
     flex-basis: 10%;
+}
+
+@media (max-width: 1200px) {
+    .result-Wrapper {
+        flex-direction: column;
+
+    }
+
+    .pageWrapper {
+        flex-direction: column;
+        margin: 2rem 0;
+    }
 }
